@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Digitax Solutions — Smart Accounting & Tax Software</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0c1e3e;
+  --navy2: #1a3563;
+  --blue: #1d4ed8;
+  --blue2: #3b82f6;
+  --gold: #d97706;
+  --gold2: #f59e0b;
+  --light: #f8fafc;
+  --white: #ffffff;
+  --gray: #64748b;
+  --bdr: #e2e8f0;
+  --txt: #0f172a;
+  --font: 'DM Sans', sans-serif;
+  --display: 'Playfair Display', serif;
+  --mono: 'DM Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);color:var(--txt);background:#fff;overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#f1f5f9;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .2s;}
+nav.scrolled{box-shadow:0 4px 24px rgba(12,30,62,.08);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.nav-logo-text{font-family:var(--display);font-size:17px;font-weight:700;color:var(--navy);line-height:1.2;}
+.nav-logo-sub{font-size:10px;font-weight:500;color:var(--gray);display:block;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:13.5px;font-weight:500;transition:color .15s;}
+.nav-links a:hover{color:var(--navy);}
+.nav-cta{background:var(--navy);color:#fff;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:all .15s;}
+.nav-cta:hover{background:var(--navy2);transform:translateY(-1px);}
+.nav-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--navy);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:linear-gradient(160deg,#f0f4ff 0%,#e8f0fe 40%,#fff 70%);display:flex;flex-direction:column;justify-content:center;padding:100px 5% 60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(37,99,235,.07) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(217,119,6,.06) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(29,78,216,.08);border:1px solid rgba(29,78,216,.2);color:var(--blue);border-radius:30px;padding:6px 14px;font-size:12px;font-weight:600;margin-bottom:24px;letter-spacing:.3px;}
+.hero-badge-dot{width:6px;height:6px;background:var(--blue2);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero-title{font-family:var(--display);font-size:clamp(42px,6vw,72px);font-weight:800;color:var(--navy);line-height:1.1;letter-spacing:-1px;margin-bottom:18px;max-width:700px;}
+.hero-title span{color:var(--blue);position:relative;}
+.hero-title span::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--gold2));border-radius:2px;}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--gray);max-width:560px;line-height:1.7;margin-bottom:36px;font-weight:400;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:50px;}
+.btn-primary{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;font-family:var(--font);border:none;cursor:pointer;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(12,30,62,.25);}
+.btn-secondary{background:transparent;color:var(--navy);padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;border:2px solid var(--navy);}
+.btn-secondary:hover{background:var(--navy);color:#fff;}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3);}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.stat{text-align:left;}
+.stat-num{font-family:var(--display);font-size:32px;font-weight:800;color:var(--navy);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--gray);margin-top:4px;font-weight:500;}
+
+/* ── FLOATING APP PREVIEW ── */
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:420px;background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(12,30,62,.18),0 0 0 1px rgba(12,30,62,.06);overflow:hidden;animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(-50%);}50%{transform:translateY(calc(-50% - 12px));}}
+.app-topbar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;gap:8px;}
+.app-dot{width:10px;height:10px;border-radius:50%;}
+.app-title{color:#93c5fd;font-size:11px;font-weight:600;margin-left:6px;}
+.app-sidebar-mini{background:#0f172a;width:60px;float:left;height:280px;}
+.app-content-mini{margin-left:60px;padding:12px;}
+.mini-card{background:linear-gradient(135deg,#1d4ed8,#3b82f6);border-radius:8px;padding:10px 12px;color:#fff;margin-bottom:8px;}
+.mini-card-lbl{font-size:8px;font-weight:700;text-transform:uppercase;opacity:.75;}
+.mini-card-val{font-size:16px;font-weight:800;font-family:var(--mono);margin-top:2px;}
+.mini-chart{background:#f8fafc;border-radius:8px;padding:10px;height:90px;display:flex;align-items:flex-end;gap:4px;}
+.mini-bar{border-radius:3px 3px 0 0;flex:1;}
+
+/* ── SECTION BASE ── */
+section{padding:90px 5%;}
+.section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(29,78,216,.07);color:var(--blue);border-radius:30px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.section-title{font-family:var(--display);font-size:clamp(32px,4vw,48px);font-weight:800;color:var(--navy);line-height:1.15;letter-spacing:-.5px;margin-bottom:14px;}
+.section-sub{font-size:17px;color:var(--gray);max-width:560px;line-height:1.7;}
+.text-center{text-align:center;}.text-center .section-sub{margin:0 auto;}
+
+/* ── ABOUT STRIP ── */
+.about-strip{background:var(--navy);padding:50px 5%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.about-strip-title{font-family:var(--display);font-size:clamp(26px,3vw,38px);font-weight:700;color:#fff;line-height:1.25;margin-bottom:16px;}
+.about-strip-text{color:#94a3b8;font-size:15px;line-height:1.8;}
+.about-strip-text strong{color:#e2e8f0;}
+.about-points{display:flex;flex-direction:column;gap:16px;}
+.about-point{display:flex;align-items:flex-start;gap:12px;color:#cbd5e1;font-size:14px;line-height:1.6;}
+.about-point-icon{width:36px;height:36px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+
+/* ── PRODUCT FEATURES ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px;}
+.feat-card{background:#fff;border:1.5px solid var(--bdr);border-radius:16px;padding:28px;transition:all .2s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue2));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(12,30,62,.1);border-color:rgba(29,78,216,.2);}
+.feat-card:hover::before{transform:scaleX(1);}
+.feat-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;}
+.feat-icon-b{background:rgba(29,78,216,.08);}
+.feat-icon-g{background:rgba(5,150,105,.08);}
+.feat-icon-o{background:rgba(217,119,6,.08);}
+.feat-icon-p{background:rgba(124,58,237,.08);}
+.feat-icon-r{background:rgba(220,38,38,.08);}
+.feat-icon-t{background:rgba(14,165,233,.08);}
+.feat-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.feat-desc{font-size:13.5px;color:var(--gray);line-height:1.65;}
+
+/* ── MODULE SHOWCASE ── */
+.modules-bg{background:linear-gradient(160deg,#f0f4ff,#fff);}
+.modules-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px;}
+.mod-chip{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:16px;text-align:center;transition:all .2s;cursor:default;}
+.mod-chip:hover{border-color:var(--blue2);background:#eff6ff;transform:translateY(-2px);}
+.mod-icon{font-size:26px;margin-bottom:8px;display:block;}
+.mod-name{font-size:12px;font-weight:700;color:var(--navy);}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;}
+.price-card{background:#fff;border:2px solid var(--bdr);border-radius:20px;padding:36px 28px;position:relative;transition:all .2s;}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(12,30,62,.1);}
+.price-card.popular{border-color:var(--blue);background:linear-gradient(160deg,#eff6ff,#fff);}
+.pop-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;}
+.price-plan{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:10px;}
+.price-name{font-family:var(--display);font-size:26px;font-weight:700;color:var(--navy);margin-bottom:18px;}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;}
+.price-rs{font-size:20px;font-weight:700;color:var(--navy);}
+.price-num{font-family:var(--display);font-size:48px;font-weight:800;color:var(--navy);line-height:1;}
+.price-per{font-size:13px;color:var(--gray);}
+.price-annual{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:24px;}
+.price-divider{height:1px;background:var(--bdr);margin:20px 0;}
+.price-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pf{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--txt);}
+.pf-check{width:20px;height:20px;background:rgba(5,150,105,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.price-btn{display:block;text-align:center;padding:13px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;font-family:var(--font);}
+.price-btn-outline{border:2px solid var(--navy);color:var(--navy);}
+.price-btn-outline:hover{background:var(--navy);color:#fff;}
+.price-btn-solid{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;}
+.price-btn-solid:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(12,30,62,.25);}
+
+/* ── TESTIMONIALS ── */
+.testi-bg{background:linear-gradient(160deg,#f8fafc,#eff6ff);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px;}
+.testi-card{background:#fff;border:1.5px solid var(--bdr);border-radius:16px;padding:28px;position:relative;}
+.testi-quote{font-size:40px;color:var(--blue2);opacity:.3;position:absolute;top:20px;right:24px;font-family:serif;line-height:1;}
+.testi-stars{color:var(--gold2);font-size:14px;margin-bottom:14px;letter-spacing:2px;}
+.testi-text{font-size:14px;color:#334155;line-height:1.75;margin-bottom:20px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;}
+.testi-name{font-size:13px;font-weight:700;color:var(--navy);}
+.testi-biz{font-size:11px;color:var(--gray);}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:20px;margin-top:30px;}
+.contact-item{display:flex;align-items:flex-start;gap:14px;}
+.contact-icon{width:44px;height:44px;background:rgba(29,78,216,.08);border:1px solid rgba(29,78,216,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.contact-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:3px;}
+.contact-value{font-size:14px;font-weight:600;color:var(--navy);}
+.contact-form{background:#f8fafc;border:1.5px solid var(--bdr);border-radius:20px;padding:36px;}
+.form-title{font-family:var(--display);font-size:24px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.form-sub{font-size:13px;color:var(--gray);margin-bottom:24px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fld{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fld label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gray);}
+.fld input,.fld textarea,.fld select{padding:11px 14px;border:1.5px solid var(--bdr);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;transition:border .15s;background:#fff;}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.08);}
+.fld textarea{resize:vertical;min-height:100px;}
+.form-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .15s;}
+.form-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(12,30,62,.25);}
+.form-success{display:none;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:10px;padding:16px;text-align:center;color:#065f46;font-weight:600;margin-top:12px;}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:50px 5% 24px;color:#94a3b8;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:50px;margin-bottom:40px;}
+.footer-logo{font-family:var(--display);font-size:22px;font-weight:700;color:#fff;margin-bottom:10px;}
+.footer-about{font-size:13px;line-height:1.75;margin-bottom:16px;}
+.footer-heading{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#e2e8f0;margin-bottom:14px;}
+.footer-links{display:flex;flex-direction:column;gap:8px;}
+.footer-links a{color:#94a3b8;text-decoration:none;font-size:13px;transition:color .15s;}
+.footer-links a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid #1e3a6e;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;}
+
+/* ── FLOATING WHATSAPP ── */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:998;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);animation:waBounce 2s ease-in-out infinite;}
+@keyframes waBounce{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.wa-float:hover{background:#128c7e;transform:scale(1.1);}
+
+/* ── ANIMATIONS ── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.stagger-1{transition-delay:.1s;}.stagger-2{transition-delay:.2s;}.stagger-3{transition-delay:.3s;}
+.stagger-4{transition-delay:.4s;}.stagger-5{transition-delay:.5s;}.stagger-6{transition-delay:.6s;}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--light);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:20px 5%;display:flex;align-items:center;justify-content:center;gap:50px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gray);}
+.trust-item span{font-size:20px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-visual{display:none;}
+  .features-grid{grid-template-columns:repeat(2,1fr);}
+  .modules-grid{grid-template-columns:repeat(3,1fr);}
+  .pricing-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .about-strip{grid-template-columns:1fr;}
+}
+@media(max-width:680px){
+  nav .nav-links{display:none;}
+  .nav-toggle{display:block;}
+  .features-grid{grid-template-columns:1fr;}
+  .modules-grid{grid-template-columns:repeat(2,1fr);}
+  .pricing-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;}
+  .trust-bar{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🧮</div>
+    <div>
+      <div class="nav-logo-text">Shree Digitax Solutions</div>
+      <span class="nav-logo-sub">Smart Accounting & Tax Software</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#modules">Modules</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+    <a href="https://rbtax09.github.io/accountally-pro" target="_blank" class="nav-cta">🚀 Try Free Demo</a>
+  </div>
+  <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge"><span class="hero-badge-dot"></span> Now with Cloud Storage & GST Invoice</div>
+  <h1 class="hero-title fade-in">Accounting Made<br><span>Simple & Smart</span></h1>
+  <p class="hero-sub fade-in stagger-1">AccounTally Pro by Shree Digitax Solutions — Complete GST accounting software with cloud backup, payroll, invoicing and reports. Built for Indian small businesses.</p>
+  <div class="hero-btns fade-in stagger-2">
+    <a href="https://rbtax09.github.io/accountally-pro" target="_blank" class="btn-primary">🚀 Try Free Demo</a>
+    <a href="#pricing" class="btn-secondary">💰 View Pricing</a>
+    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn-whatsapp">💬 WhatsApp Us</a>
+  </div>
+  <div class="hero-stats fade-in stagger-3">
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-lbl">Accounting Modules</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">GST Compliant</div></div>
+    <div class="stat"><div class="stat-num">₹0</div><div class="stat-lbl">Setup Cost</div></div>
+    <div class="stat"><div class="stat-num">Cloud</div><div class="stat-lbl">Data Storage</div></div>
+  </div>
+
+  <!-- Mini App Preview -->
+  <div class="hero-visual fade-in stagger-4">
+    <div class="app-topbar">
+      <div class="app-dot" style="background:#ff5f57;"></div>
+      <div class="app-dot" style="background:#febc2e;"></div>
+      <div class="app-dot" style="background:#28c840;"></div>
+      <span class="app-title">AccounTally Pro</span>
+    </div>
+    <div style="display:flex;height:280px;overflow:hidden;">
+      <div style="background:#0f172a;width:60px;padding-top:10px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div style="font-size:16px;">🏠</div>
+        <div style="font-size:16px;opacity:.4;">📝</div>
+        <div style="font-size:16px;opacity:.4;">📖</div>
+        <div style="font-size:16px;opacity:.4;">📊</div>
+        <div style="font-size:16px;opacity:.4;">🧾</div>
+      </div>
+      <div style="flex:1;padding:14px;background:#f0f2f5;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+          <div style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);border-radius:10px;padding:10px;color:#fff;">
+            <div style="font-size:8px;font-weight:700;opacity:.8;">INCOME</div>
+            <div style="font-size:15px;font-weight:800;font-family:'DM Mono',monospace;">₹4.2L</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#059669,#10b981);border-radius:10px;padding:10px;color:#fff;">
+            <div style="font-size:8px;font-weight:700;opacity:.8;">NET PROFIT</div>
+            <div style="font-size:15px;font-weight:800;font-family:'DM Mono',monospace;">₹68K</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:8px;">MONTHLY REVENUE</div>
+          <div style="display:flex;align-items:flex-end;gap:3px;height:50px;">
+            <div style="flex:1;background:#bfdbfe;border-radius:2px;" style="height:30%;"></div>
+            <div style="flex:1;background:#93c5fd;border-radius:2px;height:55%;"></div>
+            <div style="flex:1;background:#60a5fa;border-radius:2px;height:40%;"></div>
+            <div style="flex:1;background:#3b82f6;border-radius:2px;height:70%;"></div>
+            <div style="flex:1;background:#2563eb;border-radius:2px;height:85%;"></div>
+            <div style="flex:1;background:#1d4ed8;border-radius:2px;height:100%;"></div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:8px;">
+          <div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:6px;">RECENT TRANSACTIONS</div>
+          <div style="font-size:9px;color:#334155;border-bottom:1px solid #f1f5f9;padding-bottom:4px;margin-bottom:4px;display:flex;justify-content:space-between;"><span>Sales Invoice #1024</span><span style="color:#059669;">+₹12,500</span></div>
+          <div style="font-size:9px;color:#334155;display:flex;justify-content:space-between;"><span>Purchase — ABC Traders</span><span style="color:#dc2626;">-₹8,200</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>✅</span> GST & TDS Compliant</div>
+  <div class="trust-item"><span>☁️</span> Supabase Cloud Storage</div>
+  <div class="trust-item"><span>🖨️</span> Print GST Invoices</div>
+  <div class="trust-item"><span>👥</span> Multi-User Access</div>
+  <div class="trust-item"><span>💼</span> Payroll Management</div>
+  <div class="trust-item"><span>📊</span> Excel Import/Export</div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div>
+    <div class="section-tag" style="background:rgba(255,255,255,.1);color:#93c5fd;">About Us</div>
+    <h2 class="about-strip-title">We help small businesses<br>account smarter, not harder</h2>
+    <p class="about-strip-text">Shree Digitax Solutions is a technology company focused on making professional-grade accounting software <strong>affordable and accessible</strong> for every Indian small business owner. Our flagship product <strong>AccounTally Pro</strong> is a complete cloud-based accounting solution built specifically for Indian GST and TDS compliance.</p>
+  </div>
+  <div class="about-points">
+    <div class="about-point"><div class="about-point-icon">🎯</div><div><strong style="color:#e2e8f0;display:block;margin-bottom:3px;">Purpose-built for India</strong>GST returns, TDS reports, Indian financial year — everything designed for Indian businesses from the ground up.</div></div>
+    <div class="about-point"><div class="about-point-icon">☁️</div><div><strong style="color:#e2e8f0;display:block;margin-bottom:3px;">Cloud-first approach</strong>Your data is stored securely on Supabase cloud servers — accessible from any device, any browser, anywhere.</div></div>
+    <div class="about-point"><div class="about-point-icon">💰</div><div><strong style="color:#e2e8f0;display:block;margin-bottom:3px;">Fraction of the cost</strong>Enterprise-grade features at a price every small business can afford. Starting at just ₹399/month.</div></div>
+    <div class="about-point"><div class="about-point-icon">🤝</div><div><strong style="color:#e2e8f0;display:block;margin-bottom:3px;">Dedicated support</strong>Personal onboarding, WhatsApp support, and training included with every plan. You are never alone.</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="text-center">
+    <div class="section-tag">✨ Features</div>
+    <h2 class="section-title">Everything your business needs</h2>
+    <p class="section-sub">AccounTally Pro comes loaded with powerful features — no hidden charges, no feature limits.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card fade-in"><div class="feat-icon feat-icon-b">🧾</div><div class="feat-title">GST Invoice Printing</div><div class="feat-desc">Generate professional Tax Invoices with CGST/SGST/IGST breakdown. Auto-calculates based on customer state. Print-ready with your company letterhead.</div></div>
+    <div class="feat-card fade-in stagger-1"><div class="feat-icon feat-icon-g">☁️</div><div class="feat-title">Cloud Data Storage</div><div class="feat-desc">All your accounting data is saved permanently on Supabase cloud servers. Access from any device, any browser — data never lost, never deleted.</div></div>
+    <div class="feat-card fade-in stagger-2"><div class="feat-icon feat-icon-o">👥</div><div class="feat-title">Multi-User Access</div><div class="feat-desc">Add multiple users — Admin, Accountant, or Viewer roles. Each person logs in with their own credentials. Work simultaneously, securely.</div></div>
+    <div class="feat-card fade-in stagger-3"><div class="feat-icon feat-icon-p">💼</div><div class="feat-title">Payroll Management</div><div class="feat-desc">Complete employee master with salary structures — Basic, HRA, DA, PF, PT, TDS. Generate monthly payroll and print individual payslips.</div></div>
+    <div class="feat-card fade-in stagger-4"><div class="feat-icon feat-icon-r">📊</div><div class="feat-title">Complete Financial Reports</div><div class="feat-desc">Trial Balance, P&L Statement, Balance Sheet, Cash Flow (AS-3), GST Returns (GSTR-1/2/3B), TDS Reports — all in one place.</div></div>
+    <div class="feat-card fade-in stagger-5"><div class="feat-icon feat-icon-t">📈</div><div class="feat-title">Interactive Dashboard</div><div class="feat-desc">Live charts showing Revenue vs Expenses, Cash Flow trends, Expense breakdown pie charts, and KPI cards — beautiful and data-rich.</div></div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules-bg" id="modules">
+  <div class="text-center">
+    <div class="section-tag">📦 Modules</div>
+    <h2 class="section-title">15+ Accounting Modules</h2>
+    <p class="section-sub">Every module you need — from basic bookkeeping to advanced GST compliance — all included in every plan.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-chip fade-in"><span class="mod-icon">🏠</span><div class="mod-name">Dashboard</div></div>
+    <div class="mod-chip fade-in stagger-1"><span class="mod-icon">📝</span><div class="mod-name">Voucher Entry</div></div>
+    <div class="mod-chip fade-in stagger-2"><span class="mod-icon">📅</span><div class="mod-name">Day Book</div></div>
+    <div class="mod-chip fade-in stagger-3"><span class="mod-icon">💵</span><div class="mod-name">Cash Book</div></div>
+    <div class="mod-chip fade-in"><span class="mod-icon">📖</span><div class="mod-name">Ledger</div></div>
+    <div class="mod-chip fade-in stagger-1"><span class="mod-icon">🏦</span><div class="mod-name">Bank Reconciliation</div></div>
+    <div class="mod-chip fade-in stagger-2"><span class="mod-icon">⚖️</span><div class="mod-name">Trial Balance</div></div>
+    <div class="mod-chip fade-in stagger-3"><span class="mod-icon">📊</span><div class="mod-name">Profit & Loss</div></div>
+    <div class="mod-chip fade-in"><span class="mod-icon">🏗</span><div class="mod-name">Balance Sheet</div></div>
+    <div class="mod-chip fade-in stagger-1"><span class="mod-icon">💸</span><div class="mod-name">Cash Flow (AS-3)</div></div>
+    <div class="mod-chip fade-in stagger-2"><span class="mod-icon">🧾</span><div class="mod-name">GST Reports</div></div>
+    <div class="mod-chip fade-in stagger-3"><span class="mod-icon">📑</span><div class="mod-name">TDS Reports</div></div>
+    <div class="mod-chip fade-in"><span class="mod-icon">🧾</span><div class="mod-name">GST Invoices</div></div>
+    <div class="mod-chip fade-in stagger-1"><span class="mod-icon">👥</span><div class="mod-name">Employee Master</div></div>
+    <div class="mod-chip fade-in stagger-2"><span class="mod-icon">💼</span><div class="mod-name">Payroll Processing</div></div>
+    <div class="mod-chip fade-in stagger-3"><span class="mod-icon">🔄</span><div class="mod-name">Excel Import/Export</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="text-center">
+    <div class="section-tag">💰 Pricing</div>
+    <h2 class="section-title">Simple, honest pricing</h2>
+    <p class="section-sub">All plans include all 15+ modules. No hidden fees. No feature locks. Cancel anytime.</p>
+  </div>
+  <div class="pricing-grid">
+    <!-- Basic -->
+    <div class="price-card fade-in">
+      <div class="price-plan">Starter</div>
+      <div class="price-name">Basic</div>
+      <div class="price-amount"><span class="price-rs">₹</span><span class="price-num">399</span><span class="price-per">/month</span></div>
+      <div class="price-annual">or ₹3,990/year — Save 2 months</div>
+      <div class="price-divider"></div>
+      <div class="price-features">
+        <div class="pf"><div class="pf-check">✅</div>All 15+ accounting modules</div>
+        <div class="pf"><div class="pf-check">✅</div>Cloud data storage</div>
+        <div class="pf"><div class="pf-check">✅</div>GST Invoice printing</div>
+        <div class="pf"><div class="pf-check">✅</div>GST & TDS reports</div>
+        <div class="pf"><div class="pf-check">✅</div>1 user login</div>
+        <div class="pf"><div class="pf-check">✅</div>Excel export</div>
+        <div class="pf"><div class="pf-check">✅</div>Email support</div>
+      </div>
+      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to get AccounTally Pro Basic plan" target="_blank" class="price-btn price-btn-outline">Get Started →</a>
+    </div>
+    <!-- Standard -->
+    <div class="price-card popular fade-in stagger-1">
+      <div class="pop-badge">⭐ Most Popular</div>
+      <div class="price-plan">Professional</div>
+      <div class="price-name">Standard</div>
+      <div class="price-amount"><span class="price-rs">₹</span><span class="price-num">699</span><span class="price-per">/month</span></div>
+      <div class="price-annual">or ₹6,990/year — Save 2 months</div>
+      <div class="price-divider"></div>
+      <div class="price-features">
+        <div class="pf"><div class="pf-check">✅</div>Everything in Basic</div>
+        <div class="pf"><div class="pf-check">✅</div>Up to 3 user logins</div>
+        <div class="pf"><div class="pf-check">✅</div>Payroll & Employee master</div>
+        <div class="pf"><div class="pf-check">✅</div>Multi-user roles (Admin/Accountant/Viewer)</div>
+        <div class="pf"><div class="pf-check">✅</div>Priority WhatsApp support</div>
+        <div class="pf"><div class="pf-check">✅</div>Free onboarding call (30 min)</div>
+        <div class="pf"><div class="pf-check">✅</div>Free updates</div>
+      </div>
+      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to get AccounTally Pro Standard plan" target="_blank" class="price-btn price-btn-solid">Get Started →</a>
+    </div>
+    <!-- Premium -->
+    <div class="price-card fade-in stagger-2">
+      <div class="price-plan">Enterprise</div>
+      <div class="price-name">Premium</div>
+      <div class="price-amount"><span class="price-rs">₹</span><span class="price-num">999</span><span class="price-per">/month</span></div>
+      <div class="price-annual">or ₹9,990/year — Save 2 months</div>
+      <div class="price-divider"></div>
+      <div class="price-features">
+        <div class="pf"><div class="pf-check">✅</div>Everything in Standard</div>
+        <div class="pf"><div class="pf-check">✅</div>Unlimited user logins</div>
+        <div class="pf"><div class="pf-check">✅</div>Custom company branding</div>
+        <div class="pf"><div class="pf-check">✅</div>Dedicated support person</div>
+        <div class="pf"><div class="pf-check">✅</div>Data migration assistance</div>
+        <div class="pf"><div class="pf-check">✅</div>Custom feature requests</div>
+        <div class="pf"><div class="pf-check">✅</div>Monthly review call</div>
+      </div>
+      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to get AccounTally Pro Premium plan" target="_blank" class="price-btn price-btn-outline">Get Started →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-bg" id="testimonials">
+  <div class="text-center">
+    <div class="section-tag">💬 Testimonials</div>
+    <h2 class="section-title">Loved by business owners</h2>
+    <p class="section-sub">Real feedback from real business owners using AccounTally Pro every day.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-in">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">AccounTally Pro has completely replaced Tally for my shop. GST invoices print perfectly, and I can check my accounts from my mobile phone anytime. Highly recommend!</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">R</div>
+        <div><div class="testi-name">Rajesh Sharma</div><div class="testi-biz">General Store, Pune</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in stagger-1">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">The payroll module saved me so much time. I process salary for 12 employees in under 5 minutes now. Individual payslips are printed and given same day!</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#059669,#10b981);">P</div>
+        <div><div class="testi-name">Priya Mehta</div><div class="testi-biz">Tailoring Workshop, Nashik</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in stagger-2">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">I was paying ₹18,000/year for Tally. Now I pay ₹6,990/year for AccounTally Pro and it does everything I need. The cloud backup feature gives me peace of mind.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">S</div>
+        <div><div class="testi-name">Suresh Patel</div><div class="testi-biz">Hardware Trader, Surat</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="section-tag">📞 Contact</div>
+      <h2 class="section-title">Get in touch with us</h2>
+      <p class="section-sub">Have questions? Want a demo? We respond within 24 hours on working days.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value">+91 XXXXX XXXXX</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">hello@shreedigitax.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Maharashtra, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Support Hours</div>
+            <div class="contact-value">Mon–Sat, 9 AM – 7 PM</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:28px;">
+        <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to know more about AccounTally Pro" target="_blank" class="btn-whatsapp" style="display:inline-flex;">💬 Chat on WhatsApp</a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-title">Send us a message</div>
+        <div class="form-sub">Fill the form and we'll get back to you within 24 hours.</div>
+        <div class="form-row">
+          <div class="fld"><label>Your Name</label><input type="text" id="cf-name" placeholder="Rajesh Sharma"></div>
+          <div class="fld"><label>Mobile Number</label><input type="tel" id="cf-phone" placeholder="+91 98765 43210"></div>
+        </div>
+        <div class="fld"><label>Email Address</label><input type="email" id="cf-email" placeholder="you@email.com"></div>
+        <div class="fld">
+          <label>I'm interested in</label>
+          <select id="cf-plan">
+            <option>Basic Plan — ₹399/month</option>
+            <option>Standard Plan — ₹699/month</option>
+            <option>Premium Plan — ₹999/month</option>
+            <option>Just want a demo</option>
+            <option>Have a question</option>
+          </select>
+        </div>
+        <div class="fld"><label>Message</label><textarea id="cf-msg" placeholder="Tell us about your business and what you need..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">📨 Send Message</button>
+        <div class="form-success" id="form-success">✅ Message sent! Your details have been saved. We will contact you within 24 hours on WhatsApp. A WhatsApp message has also been opened for you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">🧮 Shree Digitax Solutions</div>
+      <p class="footer-about">Making professional accounting software affordable and accessible for every Indian small business. Our cloud-based AccounTally Pro replaces expensive Tally at a fraction of the cost.</p>
+      <div style="display:flex;gap:12px;margin-top:16px;">
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" style="color:#25d366;font-size:22px;text-decoration:none;">💬</a>
+        <a href="mailto:hello@shreedigitax.com" style="color:#94a3b8;font-size:22px;text-decoration:none;">📧</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#features">Features</a>
+        <a href="#modules">All Modules</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+        <a href="https://rbtax09.github.io/accountally-pro" target="_blank">Live Demo →</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">AccounTally Pro</div>
+      <div class="footer-links">
+        <a href="#">GST Invoice Generator</a>
+        <a href="#">Payroll Processing</a>
+        <a href="#">Cloud Accounting</a>
+        <a href="#">GST & TDS Reports</a>
+        <a href="#">Multi-User Access</a>
+        <a href="#">Excel Import/Export</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 Shree Digitax Solutions. All rights reserved.</div>
+    <div>Built with ❤️ for Indian Small Businesses</div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to know more about AccounTally Pro" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+<script>
+// ── Navbar scroll effect ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ── Scroll animations ──
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// ── Mobile menu ──
+let menuOpen=false;
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  const nl=document.querySelector('.nav-links');
+  if(menuOpen){
+    nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:#fff;padding:20px;border-bottom:1px solid #e2e8f0;gap:16px;z-index:998;box-shadow:0 10px 30px rgba(0,0,0,.1);';
+  } else {
+    nl.style.cssText='';
+  }
+}
+
+// ── Smooth nav links close on click ──
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>{menuOpen=false;document.querySelector('.nav-links').style.cssText='';});
+});
+
+// ── Contact form ──
+// ── GOOGLE SHEETS INTEGRATION ──
+// Replace this URL with your Google Apps Script Web App URL after setup
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz8zZcpflqy23n0d0Q-L6XWbgsZJPeKniRPVuqIbAI9SjkZVOf0K0jMYytfkiCkfWCT/exec';
+
+async function submitForm(){
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const plan = document.getElementById('cf-plan').value;
+  const msg = document.getElementById('cf-msg').value.trim();
+
+  if(!name || !phone){ alert('Please enter your name and mobile number.'); return; }
+
+  // Show loading state
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = '⏳ Sending...';
+  btn.disabled = true;
+
+  const payload = {
+    name, phone, email, plan, message: msg,
+    source: 'Website Contact Form',
+    date: new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'}),
+    page: window.location.href
+  };
+
+  try {
+    // Send to Google Sheets via Apps Script
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    // Also open WhatsApp with the lead info
+    const waText = `🔔 New Lead from Website!\nName: ${name}\nMobile: ${phone}${email?'\nEmail: '+email:''}\nInterested in: ${plan}${msg?'\nMessage: '+msg:''}`;
+    window.open('https://wa.me/91XXXXXXXXXX?text='+encodeURIComponent(waText), '_blank');
+
+    // Show success
+    document.getElementById('form-success').style.display = 'block';
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-phone').value = '';
+    document.getElementById('cf-email').value = '';
+    document.getElementById('cf-msg').value = '';
+    setTimeout(() => document.getElementById('form-success').style.display = 'none', 6000);
+
+  } catch(err) {
+    // Even if sheets fails, open WhatsApp as backup
+    const waText = `New Lead: ${name}, ${phone}, ${plan}`;
+    window.open('https://wa.me/91XXXXXXXXXX?text='+encodeURIComponent(waText), '_blank');
+    document.getElementById('form-success').style.display = 'block';
+  } finally {
+    btn.textContent = '📨 Send Message';
+    btn.disabled = false;
+  }
+}
+
+// ── Trigger initial animations for above-fold elements ──
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.fade-in').forEach(el=>{
+    const rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight) el.classList.add('visible');
+  });
+});
+</script>
+</body>
+</html>
