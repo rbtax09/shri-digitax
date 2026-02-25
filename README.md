@@ -1,1 +1,1 @@
-# shri-digitax
+# digitax
